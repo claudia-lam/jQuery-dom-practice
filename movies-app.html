@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Movies App</title>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5/dist/css/bootstrap.css">
+
+<body>
+    <header>JQuery Movies App</header>
+    <form>
+        <label for="title">Title:</label><br>
+        <input type="text" id="title"><br>
+        <label for="rating">Rating:</label><br>
+        <input type="text" id="rating"><br>
+        <input type="submit" value="submit" id=submit>
+
+    </form>
+    <div class="addedInputs"></div>
+
+
+    <script src="https://unpkg.com/jquery"></script>
+    <script>
+        $("#submit").on("click", createMovieRating);
+
+        function deleteInput(evt){ 
+            let $parent = $(evt.target).parent();
+            $parent.remove();
+            
+        }
+ 
+        function createMovieRating(evt){ 
+
+            evt.preventDefault();
+            //create div element for title and rating
+            //change variable to titleDiv to keep similar pattern
+            let $userInput = $("<div>");
+            $userInput.addClass("inputResults");
+
+            //initalize title and rating input values
+            //make clear it is user input for variable name
+            let userTitle = $("#title").val();
+            let userRating = $("#rating").val();
+
+            //add input values to div element
+            $userInput.text(`${userTitle} ${userRating}`);
+
+            //create deleteButton to delete input elements
+            //shortcut: fn 2 to rename variable
+            let $deleteButton = $("<button>").addClass("delete");
+            $userInput.append($deleteButton);
+            $deleteButton.on("click", deleteInput);
+            $deleteButton.text("delete");
+            
+            //apppend div element to addedInputs div
+            $(".addedInputs").append($userInput);
+            //$("form").reset();
+        }
+
+    </script>
+</body>
+
+
+</html>
